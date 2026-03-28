@@ -1,5 +1,10 @@
 #!/bin/bash
 
+git config user.name "github-actions[bot]"
+git config user.email "github-actions[bot]@users.noreply.github.com"
+
+git pull --rebase origin main
+
 if [[ "$REPO_NAME" == *"-front" ]] || [[ "$REPO_NAME" == *"-back" ]] || [[ "$REPO_NAME" == *"-docs" ]]; then
   echo "Repo $REPO_NAME ignorado pelos sufixos."
   exit 0
@@ -21,17 +26,13 @@ fi
 
 if ! grep -q "$REPO_NAME" README.md; then
   if ! grep -q "Projeto | Link" README.md; then
-    echo "" >> README.md
-    echo "Projeto | Link" >> README.md
-    echo ":---: | :---:" >> README.md
+    echo -e "\n| Projeto | Link |" >> README.md
+    echo "| :---: | :---: |" >> README.md
   fi
-
   echo "| $REPO_NAME | [Acessar](https://github.com/$USER_NAME/$REPO_NAME) |" >> README.md
 fi
 
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
 git add .
-git commit -m "auto: link submodule $REPO_NAME and add on README.md" || echo "Nada para commitar"
+git commit -m "auto: link submodule $REPO_NAME and sync manual changes" || echo "Nada para commitar"
 git pull --rebase -X ours origin main
 git push origin main
