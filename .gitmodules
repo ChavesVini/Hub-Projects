@@ -34,3 +34,6 @@
 [submodule "projects/prova-mineda-vue"]
 	path = projects/prova-mineda-vue
 	url = https://github.com/ChavesVini/prova-mineda-vue.git
+[submodule "projects/random-password-generator"]
+	path = projects/random-password-generator
+	url = https://github.com/ChavesVini/random-password-generator.git
