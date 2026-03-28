@@ -1,27 +1,47 @@
-name: Sync Hub
+name: Sync Hub (Hybrid Scanner)
+
 on:
+  schedule:
+    - cron: '0 0 * * *'
   repository_dispatch:
     types: [repo_created]
   workflow_dispatch:
     inputs:
       repo_name:
-        description: 'Nome do repositório (ex: meu-projeto-etl)'
-        required: true
+        description: 'Nome do repo (deixe vazio para SCAN COMPLETO)'
+        required: false
+        default: ''
 
 jobs:
   update-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Hub
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.API_TRIGGER_TOKEN }}
           submodules: true
 
-      - name: Run Update Script
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Sync Logic
         env:
           REPO_NAME: ${{ github.event.client_payload.repo_name || github.event.inputs.repo_name }}
           USER_NAME: ${{ github.repository_owner }}
           API_TOKEN: ${{ secrets.API_TRIGGER_TOKEN }}
         run: |
           chmod +x update_hub.sh
-          ./update_hub.sh
+          
+          if [ -n "$REPO_NAME" ]; then
+            echo "🎯 Processando repositório específico: $REPO_NAME"
+            ./update_hub.sh
+          else
+            echo "🔍 Iniciando varredura completa (Full Scan)..."
+            python scanner_all_repository.py
+          fi

@@ -36,4 +36,3 @@ fi
 git add .
 git commit -m "auto: link submodule $REPO_NAME and add on README.md" || echo "Nada para commitar"
 git pull --rebase -X ours origin main
-git push origin main || (sleep 5 && git pull --rebase origin main && git push origin main)
