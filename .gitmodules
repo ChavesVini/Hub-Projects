@@ -4,3 +4,6 @@
 [submodule "projects/autoflex"]
 	path = projects/autoflex
 	url = https://github.com/ChavesVini/autoflex.git
+[submodule "projects/Bertoti"]
+	path = projects/Bertoti
+	url = https://github.com/ChavesVini/Bertoti.git
