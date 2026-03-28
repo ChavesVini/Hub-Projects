@@ -46,3 +46,6 @@
 [submodule "projects/TDD_Practice_LAB_V"]
 	path = projects/TDD_Practice_LAB_V
 	url = https://github.com/ChavesVini/TDD_Practice_LAB_V.git
+[submodule "projects/test-integration-dockerfile"]
+	path = projects/test-integration-dockerfile
+	url = https://github.com/ChavesVini/test-integration-dockerfile.git
