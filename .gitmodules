@@ -37,3 +37,6 @@
 [submodule "projects/random-password-generator"]
 	path = projects/random-password-generator
 	url = https://github.com/ChavesVini/random-password-generator.git
+[submodule "projects/simple-online-store"]
+	path = projects/simple-online-store
+	url = https://github.com/ChavesVini/simple-online-store.git
