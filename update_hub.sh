@@ -31,7 +31,7 @@ fi
 
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
+git pull --rebase origin main
 git add .
 git commit -m "auto: link submodule $REPO_NAME and add on README.md" || echo "Nada para commitar"
-git pull --rebase origin main
 git push origin main
