@@ -7,3 +7,6 @@
 [submodule "projects/Bertoti"]
 	path = projects/Bertoti
 	url = https://github.com/ChavesVini/Bertoti.git
+[submodule "projects/ChavesVini"]
+	path = projects/ChavesVini
+	url = https://github.com/ChavesVini/ChavesVini.git
