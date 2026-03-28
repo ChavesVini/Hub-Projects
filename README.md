@@ -12,3 +12,4 @@ Hello! This is all my projects who i did in my graduation, select one folder or 
 | LPII | [Acessar](https://github.com/ChavesVini/LPII) |
 | Portfolio-BD | [Acessar](https://github.com/ChavesVini/Portfolio-BD) |
 | projeto-spring-2024-2 | [Acessar](https://github.com/ChavesVini/projeto-spring-2024-2) |
+| projeto-vue-lab4-2024-2 | [Acessar](https://github.com/ChavesVini/projeto-vue-lab4-2024-2) |
