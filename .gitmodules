@@ -10,3 +10,6 @@
 [submodule "projects/ChavesVini"]
 	path = projects/ChavesVini
 	url = https://github.com/ChavesVini/ChavesVini.git
+[submodule "projects/Jogo-do-numero-secreto"]
+	path = projects/Jogo-do-numero-secreto
+	url = https://github.com/ChavesVini/Jogo-do-numero-secreto.git
