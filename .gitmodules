@@ -43,3 +43,6 @@
 [submodule "projects/sql-generator"]
 	path = projects/sql-generator
 	url = https://github.com/ChavesVini/sql-generator.git
+[submodule "projects/TDD_Practice_LAB_V"]
+	path = projects/TDD_Practice_LAB_V
+	url = https://github.com/ChavesVini/TDD_Practice_LAB_V.git
