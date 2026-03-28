@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ "$REPO_NAME" == *"-front" ]] || [[ "$REPO_NAME" == *"-back" ]] || [[ "$REPO_NAME" == *"-docs" ]]; then
+  echo "Repo $REPO_NAME ignorado pelos sufixos."
+  exit 0
+fi
+
+mkdir -p projects
+touch README.md
+
+if ! curl -s -I -f "https://github.com/$USER_NAME/$REPO_NAME" > /dev/null; then
+  echo "Erro: O repositório $REPO_NAME não pertence a $USER_NAME ou é privado/org."
+  exit 1
+fi
+
+git remote set-url origin "https://x-access-token:${API_TOKEN}@github.com/${USER_NAME}/Hub-Projects.git"
+
+if [ ! -d "projects/$REPO_NAME" ]; then
+  git submodule add "https://github.com/$USER_NAME/$REPO_NAME.git" "projects/$REPO_NAME"
+fi
+
+if ! grep -q "$REPO_NAME" README.md; then
+  echo "| $REPO_NAME | [Acessar](https://github.com/$USER_NAME/$REPO_NAME) |" >> README.md
+fi
+
+git config user.name "github-actions[bot]"
+git config user.email "github-actions[bot]@users.noreply.github.com"
+git add .
+git commit -m "auto: link submodule $REPO_NAME" || echo "Nada para commitar"
+git push origin main
