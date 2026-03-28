@@ -19,3 +19,6 @@
 [submodule "projects/LPII"]
 	path = projects/LPII
 	url = https://github.com/ChavesVini/LPII.git
+[submodule "projects/Portfolio-BD"]
+	path = projects/Portfolio-BD
+	url = https://github.com/ChavesVini/Portfolio-BD.git
