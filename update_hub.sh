@@ -3,7 +3,8 @@
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 
-git pull --rebase origin main
+git fetch origin main
+git reset --hard origin/main
 
 if [[ "$REPO_NAME" == *"-front" ]] || [[ "$REPO_NAME" == *"-back" ]] || [[ "$REPO_NAME" == *"-docs" ]]; then
   echo "Repo $REPO_NAME ignorado pelos sufixos."
@@ -33,6 +34,6 @@ if ! grep -q "$REPO_NAME" README.md; then
 fi
 
 git add .
-git commit -m "auto: link submodule $REPO_NAME and sync manual changes" || echo "Nada para commitar"
+git commit -m "auto: link submodule $REPO_NAME and add on README.md" || echo "Nada para commitar"
 git pull --rebase -X ours origin main
-git push origin main
+git push origin main || (sleep 5 && git pull --rebase origin main && git push origin main)
