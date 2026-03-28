@@ -1,3 +1,6 @@
 [submodule "projects/test-workflow-hub"]
 	path = projects/test-workflow-hub
 	url = https://github.com/ChavesVini/test-workflow-hub.git
+[submodule "projects/autoflex"]
+	path = projects/autoflex
+	url = https://github.com/ChavesVini/autoflex.git
