@@ -22,3 +22,6 @@
 [submodule "projects/Portfolio-BD"]
 	path = projects/Portfolio-BD
 	url = https://github.com/ChavesVini/Portfolio-BD.git
+[submodule "projects/projeto-spring-2024-2"]
+	path = projects/projeto-spring-2024-2
+	url = https://github.com/ChavesVini/projeto-spring-2024-2.git
