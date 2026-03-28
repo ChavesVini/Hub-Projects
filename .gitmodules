@@ -28,3 +28,6 @@
 [submodule "projects/projeto-vue-lab4-2024-2"]
 	path = projects/projeto-vue-lab4-2024-2
 	url = https://github.com/ChavesVini/projeto-vue-lab4-2024-2.git
+[submodule "projects/prova-mineda"]
+	path = projects/prova-mineda
+	url = https://github.com/ChavesVini/prova-mineda.git
