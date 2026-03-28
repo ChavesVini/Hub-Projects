@@ -13,3 +13,6 @@
 [submodule "projects/Jogo-do-numero-secreto"]
 	path = projects/Jogo-do-numero-secreto
 	url = https://github.com/ChavesVini/Jogo-do-numero-secreto.git
+[submodule "projects/Linguagem-de-Programacao-I"]
+	path = projects/Linguagem-de-Programacao-I
+	url = https://github.com/ChavesVini/Linguagem-de-Programacao-I.git
