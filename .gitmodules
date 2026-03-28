@@ -31,3 +31,6 @@
 [submodule "projects/prova-mineda"]
 	path = projects/prova-mineda
 	url = https://github.com/ChavesVini/prova-mineda.git
+[submodule "projects/prova-mineda-vue"]
+	path = projects/prova-mineda-vue
+	url = https://github.com/ChavesVini/prova-mineda-vue.git
