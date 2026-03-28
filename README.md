@@ -17,3 +17,4 @@ Hello! This is all my projects who i did in my graduation, select one folder or 
 | prova-mineda-vue | [Acessar](https://github.com/ChavesVini/prova-mineda-vue) |
 | random-password-generator | [Acessar](https://github.com/ChavesVini/random-password-generator) |
 | simple-online-store | [Acessar](https://github.com/ChavesVini/simple-online-store) |
+| sql-generator | [Acessar](https://github.com/ChavesVini/sql-generator) |
