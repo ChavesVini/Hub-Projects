@@ -19,6 +19,8 @@ if ! curl -s -I -f "https://github.com/$USER_NAME/$REPO_NAME" > /dev/null; then
   exit 1
 fi
 
+echo "Erro: $API_TOKEN $REPO_NAME $USER_NAME"
+
 git remote set-url origin "https://x-access-token:${API_TOKEN}@github.com/${USER_NAME}/Hub-Projects.git"
 
 if [ ! -d "projects/$REPO_NAME" ]; then
