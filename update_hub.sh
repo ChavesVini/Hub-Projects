@@ -28,6 +28,8 @@ if ! grep -q "$REPO_NAME" README.md; then
 
   echo "| $REPO_NAME | [Acessar](https://github.com/$USER_NAME/$REPO_NAME) |" >> README.md
 fi
+
+git pull
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 git add .
