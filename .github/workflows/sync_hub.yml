@@ -39,9 +39,9 @@ jobs:
           chmod +x update_hub.sh
           
           if [ -n "$REPO_NAME" ]; then
-            echo "🎯 Processando repositório específico: $REPO_NAME"
+            echo "Processando repositório específico: $REPO_NAME"
             ./update_hub.sh
           else
-            echo "🔍 Iniciando varredura completa (Full Scan)..."
+            echo "Iniciando varredura completa (Full Scan)..."
             python scanner_all_repository.py
           fi
