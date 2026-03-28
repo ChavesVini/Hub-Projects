@@ -20,9 +20,14 @@ if [ ! -d "projects/$REPO_NAME" ]; then
 fi
 
 if ! grep -q "$REPO_NAME" README.md; then
+  if ! grep -q "Projeto | Link" README.md; then
+    echo "" >> README.md
+    echo "Projeto | Link" >> README.md
+    echo ":---: | :---:" >> README.md
+  fi
+
   echo "| $REPO_NAME | [Acessar](https://github.com/$USER_NAME/$REPO_NAME) |" >> README.md
 fi
-
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 git add .
