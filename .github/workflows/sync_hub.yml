@@ -2,15 +2,15 @@ name: "Sync Hub"
 
 on:
   schedule:
-    - cron: '45 12 * * *'
+    - cron: '40 13 * * *'
   repository_dispatch:
     types: [repo_created]
-  workflow_dispatch:
-    inputs:
-      repo_name:
-        description: 'Target repository name'
-        required: false
-        default: ''
+  # workflow_dispatch:
+  #   inputs:
+  #     repo_name:
+  #       description: 'Target repository name'
+  #       required: false
+  #       default: ''
 
 permissions:
   contents: write
