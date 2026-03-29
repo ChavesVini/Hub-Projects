@@ -1,4 +1,12 @@
 ## Hub-Projects
 
-Hello! This is all my projects who i did in my graduation, select one folder or select on the link below.
+Welcome! This is a collection of my technical work, including academic projects, personal experiments, and coding challenges for company assessments. Feel free to explore the folders or use the links below.
 
+| Project | Link |
+| :---: | :---: |
+| Avaliação 360 | [Access](https://github.com/wiz-fatec/avaliacao-360) |
+| TG Manager | [Access](https://github.com/wiz-fatec/api-2BD) |
+| Dom Rock Pipeline Configurator | [Access](https://github.com/wiz-fatec/dom-rock-pipeline-configurator) |
+| GEO-IOT | [Access](https://github.com/manolito-fatec/geo-iot-2024-1) |
+| Vision | [Access](https://github.com/new-ge/VISION) |
+| LuminIA | [Access](https://github.com/new-ge/LuminIA) |

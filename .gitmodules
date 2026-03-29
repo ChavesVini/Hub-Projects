@@ -1,0 +1,18 @@
+[submodule "projects/avaliacao-360"]
+	path = projects/avaliacao-360
+	url = https://github.com/wiz-fatec/avaliacao-360.git
+[submodule "projects/api-2BD"]
+	path = projects/api-2BD
+	url = https://github.com/wiz-fatec/api-2BD.git
+[submodule "projects/dom-rock-pipeline-configurator"]
+	path = projects/dom-rock-pipeline-configurator
+	url = https://github.com/wiz-fatec/dom-rock-pipeline-configurator.git
+[submodule "projects/geo-iot-2024-1"]
+	path = projects/geo-iot-2024-1
+	url = https://github.com/manolito-fatec/geo-iot-2024-1.git
+[submodule "projects/VISION"]
+	path = projects/VISION
+	url = https://github.com/new-ge/VISION.git
+[submodule "projects/LuminIA"]
+	path = projects/LuminIA
+	url = https://github.com/new-ge/LuminIA.git
