@@ -2,7 +2,7 @@ name: "Sync Hub (Hybrid Scanner)"
 
 on:
   schedule:
-    - cron: '0 3 * * *' # Roda às 00:00 (Brasília)
+    - cron: '0 3 * * *'
   repository_dispatch:
     types: [repo_created]
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         with:
           token: ${{ secrets.API_TRIGGER_TOKEN }}
           submodules: true
-          fetch-depth: 0 # Garante que o histórico está completo para o push
+          fetch-depth: 0
 
       - name: Set up Python Environment
         uses: actions/setup-python@v4
