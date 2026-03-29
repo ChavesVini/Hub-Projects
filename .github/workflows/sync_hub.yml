@@ -2,7 +2,7 @@ name: "Sync Hub"
 
 on:
   schedule:
-    - cron: '41 12 * * *'
+    - cron: '45 12 * * *'
   repository_dispatch:
     types: [repo_created]
   workflow_dispatch:
