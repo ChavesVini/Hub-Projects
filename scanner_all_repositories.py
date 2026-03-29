@@ -3,7 +3,7 @@ import requests
 import subprocess
 
 USER = os.getenv('USER_NAME')
-TOKEN = os.getenv('API_TOKEN')
+TOKEN = os.getenv('API_TRIGGER_TOKEN')
 SKIP_SUFFIXES = ('-front', '-back', '-docs', 'hub-projects', 'chavesvini', 'linguagem-de-programacao-i', 'test-', 'teste-', 'testes-', 'projeto-', 'prova-', 'portfolio-bd', 'practice_', 'lpii', 'bertoti', 'programação', 'areachecker', 'avaliação', 'start with java')
 
 def get_my_repos():
