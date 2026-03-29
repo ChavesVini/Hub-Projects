@@ -1,8 +1,8 @@
-name: "Sync Hub (Hybrid Scanner)"
+name: "Sync Hub"
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '46 4 * * *'
   repository_dispatch:
     types: [repo_created]
   workflow_dispatch:
