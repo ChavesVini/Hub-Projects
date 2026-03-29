@@ -15,7 +15,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  
+
 jobs:
   update-hub:
     runs-on: ubuntu-latest
@@ -23,8 +23,8 @@ jobs:
       - name: Checkout Hub Repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.API_TRIGGER_TOKEN }}
-          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: recursive
           fetch-depth: 0
 
       - name: Set up Python Environment
