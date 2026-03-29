@@ -3,10 +3,6 @@
 mkdir -p projects
 touch README.md
 
-if [[ "$REPO_NAME" == *"-front" ]] || [[ "$REPO_NAME" == *"-back" ]] || [[ "$REPO_NAME" == *"-docs" ]]; then
-  exit 0
-fi
-
 if [ -d ".git/modules/projects/$REPO_NAME" ] || grep -q "path = projects/$REPO_NAME" .gitmodules 2>/dev/null; then
   echo "$REPO_NAME já é um submódulo. Pulando..."
 else
@@ -24,6 +20,6 @@ fi
 
 if [ "$SKIP_COMMIT" != "true" ]; then
     git add .
-    git commit -m "auto: link $REPO_NAME"
+    git commit -m ":memo: add $REPO_NAME in README.md and submodule"
     git push origin main
 fi
