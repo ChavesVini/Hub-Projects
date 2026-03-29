@@ -44,10 +44,3 @@ if __name__ == "__main__":
         for repo in repos:
             print(f"Preparando: {repo}")
             subprocess.run(["bash", "./update_hub.sh"], env={**os.environ, "REPO_NAME": repo, "SKIP_COMMIT": "true"})
-        
-        print("Finalizando: Fazendo commit de todas as alterações...")
-        subprocess.run(["git", "config", "user.name", "github-actions[bot]"])
-        subprocess.run(["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"])
-        subprocess.run(["git", "add", "."])
-        subprocess.run(["git", "commit", "-m", ":memo: add project(s) to hub-projects"])
-        subprocess.run(["git", "push", "origin", "main"])

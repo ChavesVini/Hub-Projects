@@ -1,14 +1,14 @@
-name: Sync Hub (Hybrid Scanner)
+name: "Sync Hub (Hybrid Scanner)"
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 3 * * *' # Roda às 00:00 (Brasília)
   repository_dispatch:
     types: [repo_created]
   workflow_dispatch:
     inputs:
       repo_name:
-        description: 'Nome do repo (deixe vazio para SCAN COMPLETO)'
+        description: 'Target repository name'
         required: false
         default: ''
 
@@ -16,21 +16,22 @@ jobs:
   update-hub:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Hub
+      - name: Checkout Hub Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.API_TRIGGER_TOKEN }}
           submodules: true
+          fetch-depth: 0 # Garante que o histórico está completo para o push
 
-      - name: Set up Python
+      - name: Set up Python Environment
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
+      - name: Install Python Dependencies
         run: pip install requests
 
-      - name: Run Sync Logic
+      - name: Execute Sync Logic
         env:
           REPO_NAME: ${{ github.event.client_payload.repo_name || github.event.inputs.repo_name }}
           USER_NAME: ${{ github.repository_owner }}
@@ -39,9 +40,16 @@ jobs:
           chmod +x update_hub.sh
           
           if [ -n "$REPO_NAME" ]; then
-            echo "Processando repositório específico: $REPO_NAME"
+            echo "Processing specific repository: $REPO_NAME"
             ./update_hub.sh
           else
-            echo "Iniciando varredura completa (Full Scan)..."
+            echo "Initiating full scan of all repositories..."
             python scanner_all_repositories.py
           fi
+
+      - name: Finalize and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m ":sparkles: update project hub" && git push)
