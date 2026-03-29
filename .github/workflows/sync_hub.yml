@@ -12,6 +12,10 @@ on:
         required: false
         default: ''
 
+permissions:
+  contents: write
+  pull-requests: write
+  
 jobs:
   update-hub:
     runs-on: ubuntu-latest
