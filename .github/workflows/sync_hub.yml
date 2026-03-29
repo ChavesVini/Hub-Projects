@@ -43,5 +43,5 @@ jobs:
             ./update_hub.sh
           else
             echo "Iniciando varredura completa (Full Scan)..."
-            python scanner_all_repository.py
+            python scanner_all_repositories.py
           fi
