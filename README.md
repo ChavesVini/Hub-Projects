@@ -14,3 +14,4 @@ Welcome! This is a collection of my technical work, including academic projects,
 | **random-password-generator** | [View Repository](https://github.com/ChavesVini/random-password-generator) |
 | **simple-online-store** | [View Repository](https://github.com/ChavesVini/simple-online-store) |
 | **sql-generator** | [View Repository](https://github.com/ChavesVini/sql-generator) |
+| **mundo_invest** | [View Repository](https://github.com/ChavesVini/mundo_invest) |

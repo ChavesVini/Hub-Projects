@@ -28,3 +28,6 @@
 [submodule "projects/sql-generator"]
 	path = projects/sql-generator
 	url = https://github.com/ChavesVini/sql-generator.git
+[submodule "projects/mundo_invest"]
+	path = projects/mundo_invest
+	url = https://github.com/ChavesVini/mundo_invest.git
