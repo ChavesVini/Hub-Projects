@@ -23,23 +23,32 @@ ACADEMIC_ORGS_REPOS = [
 
 def get_my_repos_by_category():
     url = f"https://api.github.com/users/{USER}/repos?per_page=100"
+
     headers = {
         "Authorization": f"token {TOKEN}",
-        "Accept": "application/vnd.github.v3+json"
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "Hub-Projects-Scanner"  
     }
-    
+
     company_assessments = []
     personal_projects = []
     
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        repos_data = response.json()
+    print(f"[DEBUG] Iniciando busca para o usuário: {USER}")
+    if not TOKEN:
+        print("[DEBUG] AVISO: API_TOKEN está vazio ou nulo!")
 
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        print(f"[DEBUG] Status Code da API: {response.status_code}")
+        response.raise_for_status()
+        
+        repos_data = response.json()
+        print(f"[DEBUG] Retornados {len(repos_data)} repositórios.")
+        
         for r in repos_data:
             name = r['name']
             
-            if any(s.lower() in name.lower() for s in SKIP_SUFFIXES) or r['fork'] or r.get('private', False):
+            if r['fork'] or r.get('private', False) or any(s.lower() in name.lower() for s in SKIP_SUFFIXES):
                 continue
                 
             desc = (r.get('description') or "").lower()
@@ -50,15 +59,17 @@ def get_my_repos_by_category():
                 company_assessments.append(repo_data)
             else:
                 personal_projects.append(repo_data)
-                
-        company_assessments.sort(key=lambda x: x['name'].lower())
-        personal_projects.sort(key=lambda x: x['name'].lower())
-        
-        return company_assessments, personal_projects
         
     except Exception as e:
-        print(f"Erro ao buscar repositórios: {e}")
+        print(f"[DEBUG] ERRO CRÍTICO NA REQUISIÇÃO: {e}")
         return [], []
+            
+    print(f"[DEBUG] Mapeamento concluído. Assessments: {len(company_assessments)} | Pessoais: {len(personal_projects)}")
+    
+    company_assessments.sort(key=lambda x: x['name'].lower())
+    personal_projects.sort(key=lambda x: x['name'].lower())
+    
+    return company_assessments, personal_projects
 
 def build_table_md(title, repos_list):
     if not repos_list:
@@ -103,3 +114,21 @@ Welcome! This is a collection of my technical work, including academic projects,
         f.write(readme_template)
 
     print("README.md reescrito com sucesso do zero!")
+
+if __name__ == "__main__":
+    print("[DEBUG] Ponto de entrada do Python alcançado com sucesso!")
+    
+    if not USER:
+        print("[DEBUG] ALERTA: USER_NAME não foi encontrado nas variáveis de ambiente.")
+    if not TOKEN:
+        print("[DEBUG] ALERTA: API_TOKEN não foi encontrado nas variáveis de ambiente.")
+        
+    print("[DEBUG] Chamando get_my_repos_by_category()...")
+    company_repos, personal_repos = get_my_repos_by_category()
+    
+    print(f"[DEBUG] Repositórios retornados. Company: {len(company_repos)} | Personal: {len(personal_repos)}")
+    
+    print("[DEBUG] Chamando update_readme()...")
+    update_readme(company_repos, personal_repos)
+    
+    print("[DEBUG] Script finalizado com sucesso!")
