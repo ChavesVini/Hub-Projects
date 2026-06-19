@@ -43,7 +43,7 @@ jobs:
           API_TOKEN: ${{ secrets.API_TRIGGER_TOKEN }}
         run: |
           echo "Initiating project hub sync..."
-          python scanner_all_repositories.py
+          python -u scanner_all_repositories.py
 
       - name: Finalize and Push Changes
         run: |
