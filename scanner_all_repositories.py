@@ -37,43 +37,32 @@ def get_my_repos_by_category():
     if not TOKEN:
         print("[DEBUG] AVISO: API_TOKEN está vazio ou nulo!")
 
-    while True:
-        url = f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}"
-        print(f"[DEBUG] Batendo na API: Página {page}...")
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        print(f"[DEBUG] Status Code da API: {response.status_code}")
+        response.raise_for_status()
         
-        try:
-            response = requests.get(url, headers=headers, timeout=10)
-            print(f"[DEBUG] Status Code da API: {response.status_code}")
-            response.raise_for_status()
+        repos_data = response.json()
+        print(f"[DEBUG] Retornados {len(repos_data)} repositórios.")
+        
+        for r in repos_data:
+            name = r['name']
             
-            repos_data = response.json()
-            print(f"[DEBUG] Retornados {len(repos_data)} repositórios nesta página.")
-            
-            if not repos_data:
-                break
+            if r['fork'] or r.get('private', False) or any(s.lower() in name.lower() for s in SKIP_SUFFIXES):
+                continue
                 
-            for r in repos_data:
-                name = r['name']
-                
-                if r['fork'] or r.get('private', False) or any(s.lower() in name.lower() for s in SKIP_SUFFIXES):
-                    continue
-                    
-                desc = (r.get('description') or "").lower()
-                repo_url = f"https://github.com/{USER}/{name}"
-                repo_data = {"name": name, "url": repo_url}
-                
-                if "company assessment" in desc:
-                    company_assessments.append(repo_data)
-                else:
-                    personal_projects.append(repo_data)
+            desc = (r.get('description') or "").lower()
+            repo_url = f"https://github.com/{USER}/{name}"
+            repo_data = {"name": name, "url": repo_url}
             
-            if len(repos_data) < 100:
-                break
-            page += 1
-            
-        except Exception as e:
-            print(f"[DEBUG] ERRO CRÍTICO NA REQUISIÇÃO: {e}")
-            return [], []
+            if "company assessment" in desc:
+                company_assessments.append(repo_data)
+            else:
+                personal_projects.append(repo_data)
+        
+    except Exception as e:
+        print(f"[DEBUG] ERRO CRÍTICO NA REQUISIÇÃO: {e}")
+        return [], []
             
     print(f"[DEBUG] Mapeamento concluído. Assessments: {len(company_assessments)} | Pessoais: {len(personal_projects)}")
     
