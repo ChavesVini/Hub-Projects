@@ -125,3 +125,21 @@ Welcome! This is a collection of my technical work, including academic projects,
         f.write(readme_template)
 
     print("README.md reescrito com sucesso do zero!")
+
+if __name__ == "__main__":
+    print("[DEBUG] Ponto de entrada do Python alcançado com sucesso!")
+    
+    if not USER:
+        print("[DEBUG] ALERTA: USER_NAME não foi encontrado nas variáveis de ambiente.")
+    if not TOKEN:
+        print("[DEBUG] ALERTA: API_TOKEN não foi encontrado nas variáveis de ambiente.")
+        
+    print("[DEBUG] Chamando get_my_repos_by_category()...")
+    company_repos, personal_repos = get_my_repos_by_category()
+    
+    print(f"[DEBUG] Repositórios retornados. Company: {len(company_repos)} | Personal: {len(personal_repos)}")
+    
+    print("[DEBUG] Chamando update_readme()...")
+    update_readme(company_repos, personal_repos)
+    
+    print("[DEBUG] Script finalizado com sucesso!")
