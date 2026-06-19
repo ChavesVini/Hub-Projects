@@ -17,7 +17,6 @@ Welcome! This is a collection of my technical work, including academic projects,
 
 | Project | Link |
 | :---: | :---: |
-| **autoflex** | [View Repository](https://github.com/ChavesVini/autoflex) |
 | **mundo_invest** | [View Repository](https://github.com/ChavesVini/mundo_invest) |
 
 ### Personal Projects
