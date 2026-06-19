@@ -10,8 +10,3 @@ Welcome! This is a collection of my technical work, including academic projects,
 | **GEO-IOT** | [View Repository](https://github.com/manolito-fatec/geo-iot-2024-1) |
 | **Vision** | [View Repository](https://github.com/new-ge/VISION) |
 | **LuminIA** | [View Repository](https://github.com/new-ge/LuminIA) |
-| **autoflex** | [View Repository](https://github.com/ChavesVini/autoflex) |
-| **random-password-generator** | [View Repository](https://github.com/ChavesVini/random-password-generator) |
-| **simple-online-store** | [View Repository](https://github.com/ChavesVini/simple-online-store) |
-| **sql-generator** | [View Repository](https://github.com/ChavesVini/sql-generator) |
-| **mundo_invest** | [View Repository](https://github.com/ChavesVini/mundo_invest) |
