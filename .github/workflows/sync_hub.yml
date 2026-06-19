@@ -41,15 +41,8 @@ jobs:
           USER_NAME: ${{ github.repository_owner }}
           API_TOKEN: ${{ secrets.API_TRIGGER_TOKEN }}
         run: |
-          chmod +x update_hub.sh
-          
-          if [ -n "$REPO_NAME" ]; then
-            echo "Processing specific repository: $REPO_NAME"
-            ./update_hub.sh
-          else
-            echo "Initiating full scan of all repositories..."
-            python scanner_all_repositories.py
-          fi
+          echo "Initiating project hub sync..."
+          python scanner_all_repositories.py
 
       - name: Finalize and Push Changes
         run: |
