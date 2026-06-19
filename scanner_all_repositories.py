@@ -1,4 +1,5 @@
 import os
+
 import requests
 
 USER = os.getenv('USER_NAME')
@@ -23,42 +24,64 @@ ACADEMIC_ORGS_REPOS = [
 
 def get_my_repos_by_category():
     url = f"https://api.github.com/users/{USER}/repos?per_page=100"
+
     headers = {
         "Authorization": f"token {TOKEN}",
-        "Accept": "application/vnd.github.v3+json"
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "Hub-Projects-Scanner"  
     }
-    
+
     company_assessments = []
     personal_projects = []
     
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        repos_data = response.json()
+    print(f"[DEBUG] Iniciando busca para o usuário: {USER}")
+    if not TOKEN:
+        print("[DEBUG] AVISO: API_TOKEN está vazio ou nulo!")
 
-        for r in repos_data:
-            name = r['name']
-            
-            if any(s.lower() in name.lower() for s in SKIP_SUFFIXES) or r['fork'] or r.get('private', False):
-                continue
-                
-            desc = (r.get('description') or "").lower()
-            repo_url = f"https://github.com/{USER}/{name}"
-            repo_data = {"name": name, "url": repo_url}
-            
-            if "company assessment" in desc:
-                company_assessments.append(repo_data)
-            else:
-                personal_projects.append(repo_data)
-                
-        company_assessments.sort(key=lambda x: x['name'].lower())
-        personal_projects.sort(key=lambda x: x['name'].lower())
+    while True:
+        url = f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}"
+        print(f"[DEBUG] Batendo na API: Página {page}...")
         
-        return company_assessments, personal_projects
-        
-    except Exception as e:
-        print(f"Erro ao buscar repositórios: {e}")
-        return [], []
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            print(f"[DEBUG] Status Code da API: {response.status_code}")
+            response.raise_for_status()
+            
+            repos_data = response.json()
+            print(f"[DEBUG] Retornados {len(repos_data)} repositórios nesta página.")
+            
+            if not repos_data:
+                break
+                
+            for r in repos_data:
+                name = r['name']
+                
+                if r['fork'] or r.get('private', False) or any(s.lower() in name.lower() for s in SKIP_SUFFIXES):
+                    continue
+                    
+                desc = (r.get('description') or "").lower()
+                repo_url = f"https://github.com/{USER}/{name}"
+                repo_data = {"name": name, "url": repo_url}
+                
+                if "company assessment" in desc:
+                    company_assessments.append(repo_data)
+                else:
+                    personal_projects.append(repo_data)
+            
+            if len(repos_data) < 100:
+                break
+            page += 1
+            
+        except Exception as e:
+            print(f"[DEBUG] ERRO CRÍTICO NA REQUISIÇÃO: {e}")
+            return [], []
+            
+    print(f"[DEBUG] Mapeamento concluído. Assessments: {len(company_assessments)} | Pessoais: {len(personal_projects)}")
+    
+    company_assessments.sort(key=lambda x: x['name'].lower())
+    personal_projects.sort(key=lambda x: x['name'].lower())
+    
+    return company_assessments, personal_projects
 
 def build_table_md(title, repos_list):
     if not repos_list:
