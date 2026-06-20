@@ -12,15 +12,6 @@ SKIP_SUFFIXES = (
     'bertoti', 'programação', 'areachecker', 'avaliação', 'start with java'
 )
 
-ACADEMIC_ORGS_REPOS = [
-    {"name": "Avaliação 360", "url": "https://github.com/wiz-fatec/avaliacao-360"},
-    {"name": "Dom Rock Pipeline Configurator", "url": "https://github.com/wiz-fatec/dom-rock-pipeline-configurator"},
-    {"name": "GEO-IOT", "url": "https://github.com/manolito-fatec/geo-iot-2024-1"},
-    {"name": "LuminIA", "url": "https://github.com/new-ge/LuminIA"},
-    {"name": "TG Manager", "url": "https://github.com/wiz-fatec/api-2BD"},
-    {"name": "Vision", "url": "https://github.com/new-ge/VISION"},
-]
-
 def get_my_repos_by_category():
     url = f"https://api.github.com/users/{USER}/repos?per_page=100"
 
@@ -32,18 +23,11 @@ def get_my_repos_by_category():
 
     company_assessments = []
     personal_projects = []
-    
-    print(f"[DEBUG] Iniciando busca para o usuário: {USER}")
-    if not TOKEN:
-        print("[DEBUG] AVISO: API_TOKEN está vazio ou nulo!")
 
     try:
         response = requests.get(url, headers=headers, timeout=10)
-        print(f"[DEBUG] Status Code da API: {response.status_code}")
         response.raise_for_status()
-        
         repos_data = response.json()
-        print(f"[DEBUG] Retornados {len(repos_data)} repositórios.")
         
         for r in repos_data:
             name = r['name']
@@ -61,10 +45,7 @@ def get_my_repos_by_category():
                 personal_projects.append(repo_data)
         
     except Exception as e:
-        print(f"[DEBUG] ERRO CRÍTICO NA REQUISIÇÃO: {e}")
         return [], []
-            
-    print(f"[DEBUG] Mapeamento concluído. Assessments: {len(company_assessments)} | Pessoais: {len(personal_projects)}")
     
     company_assessments.sort(key=lambda x: x['name'].lower())
     personal_projects.sort(key=lambda x: x['name'].lower())
@@ -86,8 +67,6 @@ def build_table_md(title, repos_list):
     return "\n".join(lines) + "\n"
 
 def update_readme(company_list, personal_list):
-    print("Gerando o conteúdo completo do README...")
-    
     company_table = build_table_md("Company Assessments", company_list)
     personal_table = build_table_md("Personal Projects", personal_list)
 
@@ -112,23 +91,3 @@ Welcome! This is a collection of my technical work, including academic projects,
     
     with open(README_PATH, "w", encoding="utf-8") as f:
         f.write(readme_template)
-
-    print("README.md reescrito com sucesso do zero!")
-
-if __name__ == "__main__":
-    print("[DEBUG] Ponto de entrada do Python alcançado com sucesso!")
-    
-    if not USER:
-        print("[DEBUG] ALERTA: USER_NAME não foi encontrado nas variáveis de ambiente.")
-    if not TOKEN:
-        print("[DEBUG] ALERTA: API_TOKEN não foi encontrado nas variáveis de ambiente.")
-        
-    print("[DEBUG] Chamando get_my_repos_by_category()...")
-    company_repos, personal_repos = get_my_repos_by_category()
-    
-    print(f"[DEBUG] Repositórios retornados. Company: {len(company_repos)} | Personal: {len(personal_repos)}")
-    
-    print("[DEBUG] Chamando update_readme()...")
-    update_readme(company_repos, personal_repos)
-    
-    print("[DEBUG] Script finalizado com sucesso!")
